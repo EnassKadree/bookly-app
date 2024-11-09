@@ -5,11 +5,11 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/use_cases/no_params_use_case.dart';
 
-class FetchFeaturedBooksUseCase extends UseCase<List<BookEntity>>
+class FetchNewestBooksUseCase extends UseCase<List<BookEntity>>
 {
   final HomeRepo homeRepo;
 
-  FetchFeaturedBooksUseCase(this.homeRepo);
+  FetchNewestBooksUseCase(this.homeRepo);
 
   @override
   Future<Either<Failure, List<BookEntity>>> call()
