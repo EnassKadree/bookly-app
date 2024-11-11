@@ -4,6 +4,7 @@ import 'package:bookly_app/Features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app/Features/home/domain/repos/home_repo.dart';
 import 'package:bookly_app/core/errors/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class HomeRepoImpl extends HomeRepo
 {
@@ -27,7 +28,9 @@ class HomeRepoImpl extends HomeRepo
     }
     catch(e)
     {
-      return left(Failure());
+      if(e is DioException)
+      { return left(ServerFailure.fromDioError(e)); }
+      return left(ServerFailure(e.toString()));
     }
   }
 
@@ -46,7 +49,9 @@ class HomeRepoImpl extends HomeRepo
     }
     catch(e)
     {
-      return left(Failure());
+      if(e is DioException)
+      { return left(ServerFailure.fromDioError(e)); }
+      return left(ServerFailure(e.toString()));
     }
   }
 
