@@ -15,8 +15,8 @@ class VolumeInfo {
   int? pageCount;
   String? printType;
   List<String>? categories;
-  num? averageRating;
-  num? ratingCount;
+  double? averageRating; 
+  int? ratingCount;      
   String? maturityRating;
   bool? allowAnonLogging;
   String? contentVersion;
@@ -27,111 +27,99 @@ class VolumeInfo {
   String? infoLink;
   String? canonicalVolumeLink;
 
-  VolumeInfo({this.title, this.authors, this.publisher, this.publishedDate, this.description, this.industryIdentifiers, this.readingModes, this.pageCount, this.printType, this.categories,this.averageRating, this.ratingCount, this.maturityRating, this.allowAnonLogging, this.contentVersion, this.panelizationSummary, this.imageLinks, this.language, this.previewLink, this.infoLink, this.canonicalVolumeLink});
+  VolumeInfo({
+    this.title,
+    this.authors,
+    this.publisher,
+    this.publishedDate,
+    this.description,
+    this.industryIdentifiers,
+    this.readingModes,
+    this.pageCount,
+    this.printType,
+    this.categories,
+    this.averageRating,
+    this.ratingCount,
+    this.maturityRating,
+    this.allowAnonLogging,
+    this.contentVersion,
+    this.panelizationSummary,
+    this.imageLinks,
+    this.language,
+    this.previewLink,
+    this.infoLink,
+    this.canonicalVolumeLink,
+  });
 
   VolumeInfo.fromJson(Map<String, dynamic> json) {
-    if(json["title"] is String) {
-      title = json["title"];
-    }
-    if(json["authors"] is List) {
-      authors = json["authors"] == null ? null : List<String>.from(json["authors"]);
-    }
-    if(json["publisher"] is String) {
-      publisher = json["publisher"];
-    }
-    if(json["publishedDate"] is String) {
-      publishedDate = json["publishedDate"];
-    }
-    if(json["description"] is String) {
-      description = json["description"];
-    }
-    if(json["industryIdentifiers"] is List) {
-      industryIdentifiers = json["industryIdentifiers"] == null ? null : (json["industryIdentifiers"] as List).map((e) => IndustryIdentifiers.fromJson(e)).toList();
-    }
-    if(json["readingModes"] is Map) {
-      readingModes = json["readingModes"] == null ? null : ReadingModes.fromJson(json["readingModes"]);
-    }
-    if(json["pageCount"] is int) {
-      pageCount = json["pageCount"];
-    }
-    if(json["printType"] is String) {
-      printType = json["printType"];
-    }
-    if(json["categories"] is List) {
-      categories = json["categories"] == null ? null : List<String>.from(json["categories"]);
-    }
-    if(json["averageRating"] is num) {
-      averageRating = json["averageRating"];
-    }
-    if(json["ratingsCount"] is num) {
-      maturityRating = json["ratingsCount"];
-    }
-    if(json["maturityRating"] is String) {
-      maturityRating = json["maturityRating"];
-    }
-    if(json["allowAnonLogging"] is bool) {
-      allowAnonLogging = json["allowAnonLogging"];
-    }
-    if(json["contentVersion"] is String) {
-      contentVersion = json["contentVersion"];
-    }
-    if(json["panelizationSummary"] is Map) {
-      panelizationSummary = json["panelizationSummary"] == null ? null : PanelizationSummary.fromJson(json["panelizationSummary"]);
-    }
-    if(json["imageLinks"] is Map) {
-      imageLinks = json["imageLinks"] == null ? null : ImageLinks.fromJson(json["imageLinks"]);
-    }
-    if(json["language"] is String) {
-      language = json["language"];
-    }
-    if(json["previewLink"] is String) {
-      previewLink = json["previewLink"];
-    }
-    if(json["infoLink"] is String) {
-      infoLink = json["infoLink"];
-    }
-    if(json["canonicalVolumeLink"] is String) {
-      canonicalVolumeLink = json["canonicalVolumeLink"];
-    }
-  }
-
-  static List<VolumeInfo> fromList(List<Map<String, dynamic>> list) {
-    return list.map(VolumeInfo.fromJson).toList();
+    title = json["title"] as String?;
+    authors = json["authors"] == null ? null : List<String>.from(json["authors"]);
+    publisher = json["publisher"] as String?;
+    publishedDate = json["publishedDate"] as String?;
+    description = json["description"] as String?;
+    industryIdentifiers = json["industryIdentifiers"] == null
+        ? null
+        : (json["industryIdentifiers"] as List)
+            .map((e) => IndustryIdentifiers.fromJson(e))
+            .toList();
+    readingModes = json["readingModes"] == null
+        ? null
+        : ReadingModes.fromJson(json["readingModes"]);
+    pageCount = json["pageCount"] as int?;
+    printType = json["printType"] as String?;
+    categories = json["categories"] == null ? null : List<String>.from(json["categories"]);
+    averageRating = (json["averageRating"] is int)
+        ? (json["averageRating"] as int).toDouble() // Convert int to double if necessary
+        : json["averageRating"] as double?;
+    ratingCount = json["ratingsCount"] as int?;
+    maturityRating = json["maturityRating"] as String?;
+    allowAnonLogging = json["allowAnonLogging"] as bool?;
+    contentVersion = json["contentVersion"] as String?;
+    panelizationSummary = json["panelizationSummary"] == null
+        ? null
+        : PanelizationSummary.fromJson(json["panelizationSummary"]);
+    imageLinks = json["imageLinks"] == null ? null : ImageLinks.fromJson(json["imageLinks"]);
+    language = json["language"] as String?;
+    previewLink = json["previewLink"] as String?;
+    infoLink = json["infoLink"] as String?;
+    canonicalVolumeLink = json["canonicalVolumeLink"] as String?;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["title"] = title;
-    if(authors != null) {
-      _data["authors"] = authors;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["title"] = title;
+    if (authors != null) {
+      data["authors"] = authors;
     }
-    _data["publisher"] = publisher;
-    _data["publishedDate"] = publishedDate;
-    _data["description"] = description;
-    if(industryIdentifiers != null) {
-      _data["industryIdentifiers"] = industryIdentifiers?.map((e) => e.toJson()).toList();
+    data["publisher"] = publisher;
+    data["publishedDate"] = publishedDate;
+    data["description"] = description;
+    if (industryIdentifiers != null) {
+      data["industryIdentifiers"] = industryIdentifiers?.map((e) => e.toJson()).toList();
     }
-    if(readingModes != null) {
-      _data["readingModes"] = readingModes?.toJson();
+    if (readingModes != null) {
+      data["readingModes"] = readingModes?.toJson();
     }
-    _data["pageCount"] = pageCount;
-    _data["printType"] = printType;
-    if(categories != null) {
-      _data["categories"] = categories;
+    data["pageCount"] = pageCount;
+    data["printType"] = printType;
+    if (categories != null) {
+      data["categories"] = categories;
     }
-    _data["maturityRating"] = maturityRating;
-    _data["allowAnonLogging"] = allowAnonLogging;
-    _data["contentVersion"] = contentVersion;
-    if(panelizationSummary != null) {
-      _data["panelizationSummary"] = panelizationSummary?.toJson();
+    data["averageRating"] = averageRating;
+    data["ratingCount"] = ratingCount;
+    data["maturityRating"] = maturityRating;
+    data["allowAnonLogging"] = allowAnonLogging;
+    data["contentVersion"] = contentVersion;
+    if (panelizationSummary != null) {
+      data["panelizationSummary"] = panelizationSummary?.toJson();
     }
-    if(imageLinks != null) {
-      _data["imageLinks"] = imageLinks?.toJson();
+    if (imageLinks != null) {
+      data["imageLinks"] = imageLinks?.toJson();
     }
-    _data["language"] = language;
-    _data["previewLink"] = previewLink;
-    _data["infoLink"] = infoLink;
-    _data["canonicalVolumeLink"] = canonicalVolumeLink;
-    return _data;
+    data["language"] = language;
+    data["previewLink"] = previewLink;
+    data["infoLink"] = infoLink;
+    data["canonicalVolumeLink"] = canonicalVolumeLink;
+    return data;
   }
 }

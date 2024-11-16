@@ -4,6 +4,6 @@ import '../../../Features/home/domain/entities/book_entity.dart';
 import '../../../constants.dart';
 
 void saveBooksData(List<BookEntity> books, String box) {
-    var box = Hive.box(kFeaturedBox);
+    var box = Hive.box<BookEntity>(kFeaturedBox);
     box.addAll(books);
   }
