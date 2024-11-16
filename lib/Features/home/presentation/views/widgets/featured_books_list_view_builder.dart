@@ -15,7 +15,7 @@ class FeaturedBooksListViewBuilder extends StatelessWidget {
       builder: (context, state) 
       {
         if(state is FeaturedBooksSuccess)
-        {return const FeaturedBooksListView();}
+        {return FeaturedBooksListView(books: state.books,);}
         if(state is FeaturedBooksFailure)
         {return Center(child: Text(state.message));}
         else
